@@ -1,0 +1,65 @@
+class: "IndependenceQuestionTest"
+question: "b"
+max_points: "1"
+alg: "inferenceByVariableElimination"
+seed: "cs188"
+constructRandomly: "True"
+
+variables: """
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+"""
+
+edges: """
+A F
+D E
+C E
+B E
+E F
+F G
+E G
+C G
+E H
+H I
+H J
+"""
+
+variableDomainsDict: """
+A : 0 1
+B : 0 1
+C : 0 1
+D : 0 1
+E : 0 1
+F : 0 1
+G : 0 1
+H : 0 1
+I : 0 1
+J : 0 1
+"""
+
+queryVariables: "C G"
+
+evidenceDict: """
+B : 0
+E : 0
+F : 1
+J : 0
+"""
+
+variableEliminationOrder: ""
+
+reducedVarElimTime: "0.004057"
+fullVarElimTime: "0.007246"
+reducedEnumerationTime: "0.007275"
+fullEnumerationTime: "0.021954"
+
+# endOfNonFactors
+

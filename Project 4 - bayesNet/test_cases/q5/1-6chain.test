@@ -1,0 +1,50 @@
+class: "IndependenceQuestionTest"
+question: "a"
+max_points: "1"
+alg: "inferenceByVariableElimination"
+seed: "cs188"
+constructRandomly: "True"
+
+variables: """
+W
+D
+T
+E
+F
+G
+"""
+
+edges: """
+W D
+D T
+T E
+E F
+F G
+"""
+
+variableDomainsDict: """
+W : sun rain
+D : dry wet
+T : hot cold
+E : electric no_electric
+F : fan no_fan
+G : global_warming no_global_warming
+"""
+
+queryVariables: "T"
+
+evidenceDict: """
+D : dry
+F : fan
+"""
+
+variableEliminationOrder: "E"
+
+
+reducedVarElimTime: "0.002254"
+fullVarElimTime: "0.004939"
+reducedEnumerationTime: "0.00298"
+fullEnumerationTime: "0.00881"
+
+# endOfNonFactors
+

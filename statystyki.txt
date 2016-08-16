@@ -1,0 +1,5 @@
+12 984 	// 8445281 	- przed optymalizacj¹ struktur
+11 271	// 8445281	- po optymalizacji 
+5082	// 3296867	- most constraing variable first 
+56	// 505		- most constraining + goal possibility checking
+43	// 29		- goal possibility

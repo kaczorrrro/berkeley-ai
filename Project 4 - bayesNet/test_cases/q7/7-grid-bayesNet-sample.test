@@ -1,0 +1,477 @@
+class: "BayesNetInputFactorEqualityTest"
+max_points: "4"
+alg: "inferenceByLikelihoodWeightingSampling"
+seed: "cs188"
+constructRandomly: "False"
+extraCredit: "1"
+
+variables: """
+X11
+X12
+X13
+X14
+X15
+X21
+X22
+X23
+X24
+X25
+X31
+X32
+X33
+X34
+X35
+X41
+X42
+X43
+X44
+X45
+X51
+X52
+X53
+X54
+X55
+"""
+
+edges: """
+X11 X12
+X12 X13
+X13 X14
+X14 X15
+X21 X22
+X22 X23
+X23 X24
+X24 X25
+X31 X32
+X32 X33
+X33 X34
+X34 X35
+X41 X42
+X42 X43
+X43 X44
+X44 X45
+X51 X52
+X52 X53
+X53 X54
+X54 X55
+X11 X21
+X12 X22
+X13 X23
+X14 X24
+X15 X25
+X21 X31
+X22 X32
+X23 X33
+X24 X34
+X25 X35
+X31 X41
+X32 X42
+X33 X43
+X34 X44
+X35 X45
+X41 X51
+X42 X52
+X43 X53
+X44 X54
+X45 X55
+"""
+
+variableDomainsDict: """
+X11 : 0 1
+X12 : 0 1
+X13 : 0 1
+X14 : 0 1
+X15 : 0 1
+X21 : 0 1
+X22 : 0 1
+X23 : 0 1
+X24 : 0 1
+X25 : 0 1
+X31 : 0 1
+X32 : 0 1
+X33 : 0 1
+X34 : 0 1
+X35 : 0 1
+X41 : 0 1
+X42 : 0 1
+X43 : 0 1
+X44 : 0 1
+X45 : 0 1
+X51 : 0 1
+X52 : 0 1
+X53 : 0 1
+X54 : 0 1
+X55 : 0 1
+"""
+
+queryVariables: "X11"
+
+evidenceDict: """
+X55 : 1
+"""
+
+numSamples: "1000"
+
+# endOfNonFactors
+
+X54unconditionedVariables: "X54"
+
+X54conditionedVariables: "X44 X53"
+
+X54FactorTable: """
+X54 : 0, X44 : 0, X53 : 0 = 0.711526186695
+X54 : 1, X44 : 0, X53 : 0 = 0.288473813305
+X54 : 0, X44 : 1, X53 : 0 = 0.932157327948
+X54 : 1, X44 : 1, X53 : 0 = 0.0678426720516
+X54 : 0, X44 : 0, X53 : 1 = 1.0
+X54 : 1, X44 : 0, X53 : 1 = 0.0
+X54 : 0, X44 : 1, X53 : 1 = 0.488924536396
+X54 : 1, X44 : 1, X53 : 1 = 0.511075463604
+"""
+
+
+X55unconditionedVariables: "X55"
+
+X55conditionedVariables: "X54 X45"
+
+X55FactorTable: """
+X55 : 0, X54 : 0, X45 : 0 = 0.0
+X55 : 1, X54 : 0, X45 : 0 = 1.0
+X55 : 0, X54 : 1, X45 : 0 = 1.0
+X55 : 1, X54 : 1, X45 : 0 = 0.0
+X55 : 0, X54 : 0, X45 : 1 = 0.785596028896
+X55 : 1, X54 : 0, X45 : 1 = 0.214403971104
+X55 : 0, X54 : 1, X45 : 1 = 0.563537707688
+X55 : 1, X54 : 1, X45 : 1 = 0.436462292312
+"""
+
+
+X45unconditionedVariables: "X45"
+
+X45conditionedVariables: "X44 X35"
+
+X45FactorTable: """
+X45 : 0, X44 : 0, X35 : 0 = 0.757073830056
+X45 : 1, X44 : 0, X35 : 0 = 0.242926169944
+X45 : 0, X44 : 1, X35 : 0 = 1.0
+X45 : 1, X44 : 1, X35 : 0 = 0.0
+X45 : 0, X44 : 0, X35 : 1 = 0.523145587487
+X45 : 1, X44 : 0, X35 : 1 = 0.476854412513
+X45 : 0, X44 : 1, X35 : 1 = 0.532929807324
+X45 : 1, X44 : 1, X35 : 1 = 0.467070192676
+"""
+
+
+X44unconditionedVariables: "X44"
+
+X44conditionedVariables: "X43 X34"
+
+X44FactorTable: """
+X44 : 0, X43 : 0, X34 : 0 = 0.611297605497
+X44 : 1, X43 : 0, X34 : 0 = 0.388702394503
+X44 : 0, X43 : 1, X34 : 0 = 1.0
+X44 : 1, X43 : 1, X34 : 0 = 0.0
+X44 : 0, X43 : 0, X34 : 1 = 0.789464155924
+X44 : 1, X43 : 0, X34 : 1 = 0.210535844076
+X44 : 0, X43 : 1, X34 : 1 = 0.0
+X44 : 1, X43 : 1, X34 : 1 = 1.0
+"""
+
+
+X43unconditionedVariables: "X43"
+
+X43conditionedVariables: "X33 X42"
+
+X43FactorTable: """
+X43 : 0, X33 : 0, X42 : 0 = 1.0
+X43 : 1, X33 : 0, X42 : 0 = 0.0
+X43 : 0, X33 : 1, X42 : 0 = 0.532224766116
+X43 : 1, X33 : 1, X42 : 0 = 0.467775233884
+X43 : 0, X33 : 0, X42 : 1 = 0.0
+X43 : 1, X33 : 0, X42 : 1 = 1.0
+X43 : 0, X33 : 1, X42 : 1 = 0.243252241328
+X43 : 1, X33 : 1, X42 : 1 = 0.756747758672
+"""
+
+
+X42unconditionedVariables: "X42"
+
+X42conditionedVariables: "X32 X41"
+
+X42FactorTable: """
+X42 : 0, X32 : 0, X41 : 0 = 0.350541041804
+X42 : 1, X32 : 0, X41 : 0 = 0.649458958196
+X42 : 0, X32 : 1, X41 : 0 = 0.915432030022
+X42 : 1, X32 : 1, X41 : 0 = 0.0845679699784
+X42 : 0, X32 : 0, X41 : 1 = 0.0
+X42 : 1, X32 : 0, X41 : 1 = 1.0
+X42 : 0, X32 : 1, X41 : 1 = 0.0
+X42 : 1, X32 : 1, X41 : 1 = 1.0
+"""
+
+
+X41unconditionedVariables: "X41"
+
+X41conditionedVariables: "X31"
+
+X41FactorTable: """
+X41 : 0, X31 : 0 = 0.15359477936
+X41 : 1, X31 : 0 = 0.84640522064
+X41 : 0, X31 : 1 = 1.0
+X41 : 1, X31 : 1 = 0.0
+"""
+
+
+X53unconditionedVariables: "X53"
+
+X53conditionedVariables: "X43 X52"
+
+X53FactorTable: """
+X53 : 0, X43 : 0, X52 : 0 = 0.59870609466
+X53 : 1, X43 : 0, X52 : 0 = 0.40129390534
+X53 : 0, X43 : 1, X52 : 0 = 0.335325935067
+X53 : 1, X43 : 1, X52 : 0 = 0.664674064933
+X53 : 0, X43 : 0, X52 : 1 = 1.0
+X53 : 1, X43 : 0, X52 : 1 = 0.0
+X53 : 0, X43 : 1, X52 : 1 = 1.0
+X53 : 1, X43 : 1, X52 : 1 = 0.0
+"""
+
+
+X31unconditionedVariables: "X31"
+
+X31conditionedVariables: "X21"
+
+X31FactorTable: """
+X31 : 0, X21 : 0 = 0.382402089458
+X31 : 1, X21 : 0 = 0.617597910542
+X31 : 0, X21 : 1 = 0.355683847186
+X31 : 1, X21 : 1 = 0.644316152814
+"""
+
+
+X33unconditionedVariables: "X33"
+
+X33conditionedVariables: "X32 X23"
+
+X33FactorTable: """
+X33 : 0, X32 : 0, X23 : 0 = 1.0
+X33 : 1, X32 : 0, X23 : 0 = 0.0
+X33 : 0, X32 : 1, X23 : 0 = 0.191073597616
+X33 : 1, X32 : 1, X23 : 0 = 0.808926402384
+X33 : 0, X32 : 0, X23 : 1 = 0.0
+X33 : 1, X32 : 0, X23 : 1 = 1.0
+X33 : 0, X32 : 1, X23 : 1 = 0.128732223649
+X33 : 1, X32 : 1, X23 : 1 = 0.871267776351
+"""
+
+
+X11unconditionedVariables: "X11"
+
+X11conditionedVariables: ""
+
+X11FactorTable: """
+X11 : 0 = 0.334291358124
+X11 : 1 = 0.665708641876
+"""
+
+
+X25unconditionedVariables: "X25"
+
+X25conditionedVariables: "X24 X15"
+
+X25FactorTable: """
+X25 : 0, X24 : 0, X15 : 0 = 0.300152541311
+X25 : 1, X24 : 0, X15 : 0 = 0.699847458689
+X25 : 0, X24 : 1, X15 : 0 = 0.0
+X25 : 1, X24 : 1, X15 : 0 = 1.0
+X25 : 0, X24 : 0, X15 : 1 = 0.371358323606
+X25 : 1, X24 : 0, X15 : 1 = 0.628641676394
+X25 : 0, X24 : 1, X15 : 1 = 0.830267193895
+X25 : 1, X24 : 1, X15 : 1 = 0.169732806105
+"""
+
+
+X24unconditionedVariables: "X24"
+
+X24conditionedVariables: "X14 X23"
+
+X24FactorTable: """
+X24 : 0, X14 : 0, X23 : 0 = 0.856624771003
+X24 : 1, X14 : 0, X23 : 0 = 0.143375228997
+X24 : 0, X14 : 1, X23 : 0 = 1.0
+X24 : 1, X14 : 1, X23 : 0 = 0.0
+X24 : 0, X14 : 0, X23 : 1 = 0.0
+X24 : 1, X14 : 0, X23 : 1 = 1.0
+X24 : 0, X14 : 1, X23 : 1 = 1.0
+X24 : 1, X14 : 1, X23 : 1 = 0.0
+"""
+
+
+X12unconditionedVariables: "X12"
+
+X12conditionedVariables: "X11"
+
+X12FactorTable: """
+X12 : 0, X11 : 0 = 0.38159816083
+X12 : 1, X11 : 0 = 0.61840183917
+X12 : 0, X11 : 1 = 0.0113013967513
+X12 : 1, X11 : 1 = 0.988698603249
+"""
+
+
+X13unconditionedVariables: "X13"
+
+X13conditionedVariables: "X12"
+
+X13FactorTable: """
+X13 : 0, X12 : 0 = 0.252719128292
+X13 : 1, X12 : 0 = 0.747280871708
+X13 : 0, X12 : 1 = 0.0
+X13 : 1, X12 : 1 = 1.0
+"""
+
+
+X21unconditionedVariables: "X21"
+
+X21conditionedVariables: "X11"
+
+X21FactorTable: """
+X21 : 0, X11 : 0 = 0.425011877712
+X21 : 1, X11 : 0 = 0.574988122288
+X21 : 0, X11 : 1 = 1.0
+X21 : 1, X11 : 1 = 0.0
+"""
+
+
+X15unconditionedVariables: "X15"
+
+X15conditionedVariables: "X14"
+
+X15FactorTable: """
+X15 : 0, X14 : 0 = 0.493094921153
+X15 : 1, X14 : 0 = 0.506905078847
+X15 : 0, X14 : 1 = 0.0
+X15 : 1, X14 : 1 = 1.0
+"""
+
+
+X23unconditionedVariables: "X23"
+
+X23conditionedVariables: "X13 X22"
+
+X23FactorTable: """
+X23 : 0, X13 : 0, X22 : 0 = 1.0
+X23 : 1, X13 : 0, X22 : 0 = 0.0
+X23 : 0, X13 : 1, X22 : 0 = 0.558218637529
+X23 : 1, X13 : 1, X22 : 0 = 0.441781362471
+X23 : 0, X13 : 0, X22 : 1 = 0.0
+X23 : 1, X13 : 0, X22 : 1 = 1.0
+X23 : 0, X13 : 1, X22 : 1 = 1.0
+X23 : 1, X13 : 1, X22 : 1 = 0.0
+"""
+
+
+X22unconditionedVariables: "X22"
+
+X22conditionedVariables: "X12 X21"
+
+X22FactorTable: """
+X22 : 0, X12 : 0, X21 : 0 = 1.0
+X22 : 1, X12 : 0, X21 : 0 = 0.0
+X22 : 0, X12 : 1, X21 : 0 = 0.0
+X22 : 1, X12 : 1, X21 : 0 = 1.0
+X22 : 0, X12 : 0, X21 : 1 = 1.0
+X22 : 1, X12 : 0, X21 : 1 = 0.0
+X22 : 0, X12 : 1, X21 : 1 = 0.0
+X22 : 1, X12 : 1, X21 : 1 = 1.0
+"""
+
+
+X52unconditionedVariables: "X52"
+
+X52conditionedVariables: "X51 X42"
+
+X52FactorTable: """
+X52 : 0, X51 : 0, X42 : 0 = 1.0
+X52 : 1, X51 : 0, X42 : 0 = 0.0
+X52 : 0, X51 : 1, X42 : 0 = 0.140922395709
+X52 : 1, X51 : 1, X42 : 0 = 0.859077604291
+X52 : 0, X51 : 0, X42 : 1 = 1.0
+X52 : 1, X51 : 0, X42 : 1 = 0.0
+X52 : 0, X51 : 1, X42 : 1 = 0.0
+X52 : 1, X51 : 1, X42 : 1 = 1.0
+"""
+
+
+X14unconditionedVariables: "X14"
+
+X14conditionedVariables: "X13"
+
+X14FactorTable: """
+X14 : 0, X13 : 0 = 1.0
+X14 : 1, X13 : 0 = 0.0
+X14 : 0, X13 : 1 = 1.0
+X14 : 1, X13 : 1 = 0.0
+"""
+
+
+X35unconditionedVariables: "X35"
+
+X35conditionedVariables: "X25 X34"
+
+X35FactorTable: """
+X35 : 0, X25 : 0, X34 : 0 = 0.523625423199
+X35 : 1, X25 : 0, X34 : 0 = 0.476374576801
+X35 : 0, X25 : 1, X34 : 0 = 1.0
+X35 : 1, X25 : 1, X34 : 0 = 0.0
+X35 : 0, X25 : 0, X34 : 1 = 0.33639251888
+X35 : 1, X25 : 0, X34 : 1 = 0.66360748112
+X35 : 0, X25 : 1, X34 : 1 = 0.611182086641
+X35 : 1, X25 : 1, X34 : 1 = 0.388817913359
+"""
+
+
+X34unconditionedVariables: "X34"
+
+X34conditionedVariables: "X33 X24"
+
+X34FactorTable: """
+X34 : 0, X33 : 0, X24 : 0 = 1.0
+X34 : 1, X33 : 0, X24 : 0 = 0.0
+X34 : 0, X33 : 1, X24 : 0 = 1.0
+X34 : 1, X33 : 1, X24 : 0 = 0.0
+X34 : 0, X33 : 0, X24 : 1 = 0.366925835005
+X34 : 1, X33 : 0, X24 : 1 = 0.633074164995
+X34 : 0, X33 : 1, X24 : 1 = 0.813240391404
+X34 : 1, X33 : 1, X24 : 1 = 0.186759608596
+"""
+
+
+X51unconditionedVariables: "X51"
+
+X51conditionedVariables: "X41"
+
+X51FactorTable: """
+X51 : 0, X41 : 0 = 0.353605537659
+X51 : 1, X41 : 0 = 0.646394462341
+X51 : 0, X41 : 1 = 1.0
+X51 : 1, X41 : 1 = 0.0
+"""
+
+
+X32unconditionedVariables: "X32"
+
+X32conditionedVariables: "X31 X22"
+
+X32FactorTable: """
+X32 : 0, X31 : 0, X22 : 0 = 0.0
+X32 : 1, X31 : 0, X22 : 0 = 1.0
+X32 : 0, X31 : 1, X22 : 0 = 1.0
+X32 : 1, X31 : 1, X22 : 0 = 0.0
+X32 : 0, X31 : 0, X22 : 1 = 0.0
+X32 : 1, X31 : 0, X22 : 1 = 1.0
+X32 : 0, X31 : 1, X22 : 1 = 1.0
+X32 : 1, X31 : 1, X22 : 1 = 0.0
+"""
+

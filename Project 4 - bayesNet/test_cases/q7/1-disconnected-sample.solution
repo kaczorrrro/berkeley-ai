@@ -1,0 +1,17 @@
+# This is the solution file for test_cases/q7/1-disconnected-sample.test.
+variableDomainsDict: """
+D : dry wet
+W : sun
+T : hot cold
+"""
+
+unconditionedVariables: "D"
+
+conditionedVariables: "W"
+
+FactorTable: """
+D : dry, W : sun = 0.711
+D : wet, W : sun = 0.289
+"""
+
+

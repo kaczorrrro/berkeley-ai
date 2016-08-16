@@ -1,0 +1,37 @@
+# This is the solution file for test_cases/q7/6-large-bayesNet-sample.test.
+variableDomainsDict: """
+Y2 : ice
+Y1 : water
+Y8 : ice
+Y5 : water
+Z : evil good indifferent
+Y10 : ice
+Y4 : ice
+Y9 : water
+X10 : 0 1
+X8 : 0 1
+X9 : 0 1
+Y7 : water
+Y6 : ice
+X2 : 0 1
+X3 : 0 1
+Y3 : water
+X1 : 0 1
+X6 : 0 1
+X7 : 0 1
+X4 : 0 1
+X5 : 0 1
+"""
+
+unconditionedVariables: "X1 X2"
+
+conditionedVariables: "Y10 Y9 Y8 Y1 Y3 Y2 Y5 Y4 Y7 Y6"
+
+FactorTable: """
+X1 : 0, X2 : 0, Y10 : ice, Y9 : water, Y8 : ice, Y1 : water, Y3 : water, Y2 : ice, Y5 : water, Y4 : ice, Y7 : water, Y6 : ice = 1.0
+X1 : 1, X2 : 0, Y10 : ice, Y9 : water, Y8 : ice, Y1 : water, Y3 : water, Y2 : ice, Y5 : water, Y4 : ice, Y7 : water, Y6 : ice = 0.0
+X1 : 0, X2 : 1, Y10 : ice, Y9 : water, Y8 : ice, Y1 : water, Y3 : water, Y2 : ice, Y5 : water, Y4 : ice, Y7 : water, Y6 : ice = 0.0
+X1 : 1, X2 : 1, Y10 : ice, Y9 : water, Y8 : ice, Y1 : water, Y3 : water, Y2 : ice, Y5 : water, Y4 : ice, Y7 : water, Y6 : ice = 0.0
+"""
+
+

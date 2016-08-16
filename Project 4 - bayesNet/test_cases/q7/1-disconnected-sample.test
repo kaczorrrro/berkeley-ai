@@ -1,0 +1,66 @@
+class: "BayesNetInputFactorEqualityTest"
+max_points: "4"
+alg: "inferenceByLikelihoodWeightingSampling"
+seed: "cs188"
+constructRandomly: "False"
+
+variables: """
+W
+D
+T
+"""
+
+edges: """
+W D
+W T
+"""
+
+variableDomainsDict: """
+W : sun rain
+D : dry wet
+T : hot cold
+"""
+
+queryVariables: "D"
+
+evidenceDict: """
+W : sun
+"""
+
+numSamples: "1000"
+
+# endOfNonFactors
+
+DunconditionedVariables: "D"
+
+DconditionedVariables: "W"
+
+DFactorTable: """
+D : dry, W : sun = 0.711526186695
+D : wet, W : sun = 0.288473813305
+D : dry, W : rain = 1.0
+D : wet, W : rain = 0.0
+"""
+
+
+WunconditionedVariables: "W"
+
+WconditionedVariables: ""
+
+WFactorTable: """
+W : sun = 0.932157327948
+W : rain = 0.0678426720516
+"""
+
+
+TunconditionedVariables: "T"
+
+TconditionedVariables: "W"
+
+TFactorTable: """
+T : hot, W : sun = 0.488924536396
+T : cold, W : sun = 0.511075463604
+T : hot, W : rain = 0.0
+T : cold, W : rain = 1.0
+"""
+

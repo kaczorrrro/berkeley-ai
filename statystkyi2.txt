@@ -1,0 +1,17 @@
+Rozmiar		Czas		Nodów		Warunki
+8		5479		1 485 549	bez optymalizacji
+9		--		--		bez optymalizacji
+
+8		113		7731		forward checking
+11		5818		1 256 182	forward checking
+
+8		40		877		goal possible
+18		10955		743 230		goal possible
+
+18		2648		237 645		goal possible  + forward checking
+20		14526		1 229 773	goal possible  + forward checking
+
+11		15		139		goal possible  + forward checking lepszy
+18		130		3965
+20		--		--
+25		251		741

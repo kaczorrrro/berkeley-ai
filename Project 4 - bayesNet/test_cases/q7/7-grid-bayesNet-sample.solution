@@ -1,0 +1,39 @@
+# This is the solution file for test_cases/q7/7-grid-bayesNet-sample.test.
+variableDomainsDict: """
+X54 : 0 1
+X45 : 0 1
+X44 : 0 1
+X43 : 0 1
+X42 : 0 1
+X41 : 0 1
+X55 : 1
+X25 : 0 1
+X24 : 0 1
+X21 : 0 1
+X23 : 0 1
+X22 : 0 1
+X52 : 0 1
+X53 : 0 1
+X32 : 0 1
+X33 : 0 1
+X31 : 0 1
+X51 : 0 1
+X34 : 0 1
+X35 : 0 1
+X11 : 0 1
+X12 : 0 1
+X13 : 0 1
+X14 : 0 1
+X15 : 0 1
+"""
+
+unconditionedVariables: "X11"
+
+conditionedVariables: "X55"
+
+FactorTable: """
+X11 : 0, X55 : 1 = 0.323426964729
+X11 : 1, X55 : 1 = 0.676573035271
+"""
+
+

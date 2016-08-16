@@ -1,0 +1,100 @@
+alg: "bayesNetConstruction"
+constructRandomly: "False"
+
+variables: """
+Time
+Temp
+L
+E
+S
+Belt
+Size
+"""
+
+edges: """
+Time L
+Time E
+Temp L
+Temp E
+Temp S
+L Belt
+E Belt
+E Size
+S Size
+"""
+
+variableDomainsDict: """
+Time : day night
+Temp : hot cold
+L : 0 1
+E : 0 1
+S : 0 1
+Belt : 0 1
+Size : small normal
+"""
+
+queryVariables: ""
+
+evidenceDict: """
+"""
+
+TempFactorTable: """
+Temp : hot = 0.5
+Temp : cold = 0.5
+"""
+
+TimeFactorTable: """
+Time : day = 0.6
+Time : night = 0.4
+"""
+
+LFactorTable: """
+L : 0, Temp : hot, Time : day = 0.8
+L : 1, Temp : hot, Time : day = 0.2
+L : 0, Temp : cold, Time : day = 0.95
+L : 1, Temp : cold, Time : day = 0.05
+L : 0, Temp : hot, Time : night = 0.1
+L : 1, Temp : hot, Time : night = 0.9
+L : 0, Temp : cold, Time : night = 0.7
+L : 1, Temp : cold, Time : night = 0.3
+"""
+
+EFactorTable: """
+E : 0, Temp : hot, Time : day = 0.1
+E : 1, Temp : hot, Time : day = 0.9
+E : 0, Temp : cold, Time : day = 0.8
+E : 1, Temp : cold, Time : day = 0.2
+E : 0, Temp : hot, Time : night = 0.7
+E : 1, Temp : hot, Time : night = 0.3
+E : 0, Temp : cold, Time : night = 0.9
+E : 1, Temp : cold, Time : night = 0.1
+"""
+
+SFactorTable: """
+S : 0, Temp : hot = 0.8
+S : 1, Temp : hot = 0.2
+S : 0, Temp : cold = 0.15
+S : 1, Temp : cold = 0.85
+"""
+
+BeltFactorTable: """
+Belt : 0, E : 0, L : 0 = 0.95
+Belt : 1, E : 0, L : 0 = 0.05
+Belt : 0, E : 1, L : 0 = 0.7
+Belt : 1, E : 1, L : 0 = 0.3
+Belt : 0, E : 0, L : 1 = 0.2
+Belt : 1, E : 0, L : 1 = 0.8
+Belt : 0, E : 1, L : 1 = 0.02
+Belt : 1, E : 1, L : 1 = 0.98
+"""
+
+SizeFactorTable: """
+Size : small, S : 0, E : 0 = 0.2
+Size : normal, S : 0, E : 0 = 0.8
+Size : small, S : 1, E : 0 = 0.9
+Size : normal, S : 1, E : 0 = 0.1
+Size : small, S : 0, E : 1 = 0.1
+Size : normal, S : 0, E : 1 = 0.9
+Size : small, S : 1, E : 1 = 0.5
+Size : normal, S : 1, E : 1 = 0.5
+"""

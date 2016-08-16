@@ -1,0 +1,18 @@
+# This is the solution file for test_cases/q7/3-independent-sample-extended.test.
+variableDomainsDict: """
+S : slippery rough
+D : dry wet
+W : sun rain
+T : hot
+"""
+
+unconditionedVariables: "W"
+
+conditionedVariables: "T"
+
+FactorTable: """
+W : sun, T : hot = 0.808
+W : rain, T : hot = 0.192
+"""
+
+

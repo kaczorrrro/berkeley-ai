@@ -1,0 +1,89 @@
+class: "FactorInputFactorEqualityTest"
+max_points: "4"
+alg: "joinFactors"
+factorArgs: "A B"
+seed: "cs188"
+constructRandomly: "False"
+
+
+variableDomainsDict: """
+L : 0 1 2
+M : l m n o
+N : -10.5 1.34
+O : help! me! I'mTrapped InaBayesNet
+Q : singleEntryForThisVariable
+"""
+
+# endOfNonFactors
+
+AunconditionedVariables: "L M"
+
+AconditionedVariables: "O"
+
+AFactorTable: """
+L : 0, M : l, O : help! = 0.258330124403
+L : 1, M : l, O : help! = 0.172735794206
+L : 2, M : l, O : help! = 0.0
+L : 0, M : m, O : help! = 0.104734692091
+L : 1, M : m, O : help! = 0.0125717596017
+L : 2, M : m, O : help! = 0.0391473894072
+L : 0, M : n, O : help! = 0.0377614688681
+L : 1, M : n, O : help! = 0.0638957615356
+L : 2, M : n, O : help! = 0.191710903684
+L : 0, M : o, O : help! = 0.0
+L : 1, M : o, O : help! = 0.0667905852913
+L : 2, M : o, O : help! = 0.0523215209113
+L : 0, M : l, O : me! = 0.159661284861
+L : 1, M : l, O : me! = 0.110637840267
+L : 2, M : l, O : me! = 0.062692626321
+L : 0, M : m, O : me! = 0.0
+L : 1, M : m, O : me! = 0.0355009323002
+L : 2, M : m, O : me! = 0.0
+L : 0, M : n, O : me! = 0.062484977125
+L : 1, M : n, O : me! = 0.144114059443
+L : 2, M : n, O : me! = 0.130648517392
+L : 0, M : o, O : me! = 0.048394873988
+L : 1, M : o, O : me! = 0.131361951232
+L : 2, M : o, O : me! = 0.11450293707
+L : 0, M : l, O : I'mTrapped = 0.264780335795
+L : 1, M : l, O : I'mTrapped = 0.0163171054042
+L : 2, M : l, O : I'mTrapped = 0.0743528894523
+L : 0, M : m, O : I'mTrapped = 0.168364393407
+L : 1, M : m, O : I'mTrapped = 0.0
+L : 2, M : m, O : I'mTrapped = 0.0
+L : 0, M : n, O : I'mTrapped = 0.164978372943
+L : 1, M : n, O : I'mTrapped = 0.0
+L : 2, M : n, O : I'mTrapped = 0.0
+L : 0, M : o, O : I'mTrapped = 0.0439967549395
+L : 1, M : o, O : I'mTrapped = 0.0739682742498
+L : 2, M : o, O : I'mTrapped = 0.193241873809
+L : 0, M : l, O : InaBayesNet = 0.134402798029
+L : 1, M : l, O : InaBayesNet = 0.0773037189897
+L : 2, M : l, O : InaBayesNet = 0.143496852294
+L : 0, M : m, O : InaBayesNet = 0.118127348229
+L : 1, M : m, O : InaBayesNet = 0.143223151678
+L : 2, M : m, O : InaBayesNet = 0.0132562954964
+L : 0, M : n, O : InaBayesNet = 0.036009670999
+L : 1, M : n, O : InaBayesNet = 0.0
+L : 2, M : n, O : InaBayesNet = 0.0
+L : 0, M : o, O : InaBayesNet = 0.112024611449
+L : 1, M : o, O : InaBayesNet = 0.0865755172268
+L : 2, M : o, O : InaBayesNet = 0.135580035609
+"""
+
+
+BunconditionedVariables: "Q N"
+
+BconditionedVariables: "O"
+
+BFactorTable: """
+Q : singleEntryForThisVariable, N : -10.5, O : help! = 0.15359477936
+Q : singleEntryForThisVariable, N : 1.34, O : help! = 0.84640522064
+Q : singleEntryForThisVariable, N : -10.5, O : me! = 1.0
+Q : singleEntryForThisVariable, N : 1.34, O : me! = 0.0
+Q : singleEntryForThisVariable, N : -10.5, O : I'mTrapped = 0.59870609466
+Q : singleEntryForThisVariable, N : 1.34, O : I'mTrapped = 0.40129390534
+Q : singleEntryForThisVariable, N : -10.5, O : InaBayesNet = 1.0
+Q : singleEntryForThisVariable, N : 1.34, O : InaBayesNet = 0.0
+"""
+

@@ -1,0 +1,17 @@
+# This is the solution file for test_cases/q7/2-independent-sample.test.
+variableDomainsDict: """
+D : dry wet
+W : sun rain
+T : hot cold
+"""
+
+unconditionedVariables: "W"
+
+conditionedVariables: ""
+
+FactorTable: """
+W : sun = 0.808
+W : rain = 0.192
+"""
+
+

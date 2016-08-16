@@ -1,0 +1,41 @@
+# This is the solution file for test_cases/q3/5-extended-normalize.test.
+variableDomainsDict: """
+Q : singleEntryForThisVariable
+M : m
+L : 0 1 2
+O : help! me! I'mTrapped InaBayesNet
+N : -10.5 1.34
+"""
+
+unconditionedVariables: "L N O"
+
+conditionedVariables: "M Q"
+
+FactorTable: """
+L : 0, N : -10.5, O : help!, M : m, Q : singleEntryForThisVariable = 0.0
+L : 1, N : -10.5, O : help!, M : m, Q : singleEntryForThisVariable = 0.0603226238356
+L : 2, N : -10.5, O : help!, M : m, Q : singleEntryForThisVariable = 0.0847994356446
+L : 0, N : 1.34, O : help!, M : m, Q : singleEntryForThisVariable = 0.110603132007
+L : 1, N : 1.34, O : help!, M : m, Q : singleEntryForThisVariable = 0.111975293759
+L : 2, N : 1.34, O : help!, M : m, Q : singleEntryForThisVariable = 0.00756137681284
+L : 0, N : -10.5, O : me!, M : m, Q : singleEntryForThisVariable = 0.0154988360061
+L : 1, N : -10.5, O : me!, M : m, Q : singleEntryForThisVariable = 0.111761716204
+L : 2, N : -10.5, O : me!, M : m, Q : singleEntryForThisVariable = 0.0141930736956
+L : 0, N : 1.34, O : me!, M : m, Q : singleEntryForThisVariable = 0.0
+L : 1, N : 1.34, O : me!, M : m, Q : singleEntryForThisVariable = 0.0103443215557
+L : 2, N : 1.34, O : me!, M : m, Q : singleEntryForThisVariable = 0.0
+L : 0, N : -10.5, O : I'mTrapped, M : m, Q : singleEntryForThisVariable = 0.0759002299204
+L : 1, N : -10.5, O : I'mTrapped, M : m, Q : singleEntryForThisVariable = 0.0
+L : 2, N : -10.5, O : I'mTrapped, M : m, Q : singleEntryForThisVariable = 0.0
+L : 0, N : 1.34, O : I'mTrapped, M : m, Q : singleEntryForThisVariable = 0.0432855978795
+L : 1, N : 1.34, O : I'mTrapped, M : m, Q : singleEntryForThisVariable = 0.0
+L : 2, N : 1.34, O : I'mTrapped, M : m, Q : singleEntryForThisVariable = 0.031496980099
+L : 0, N : -10.5, O : InaBayesNet, M : m, Q : singleEntryForThisVariable = 0.0207146040764
+L : 1, N : -10.5, O : InaBayesNet, M : m, Q : singleEntryForThisVariable = 0.0675577116769
+L : 2, N : -10.5, O : InaBayesNet, M : m, Q : singleEntryForThisVariable = 0.0946626493066
+L : 0, N : 1.34, O : InaBayesNet, M : m, Q : singleEntryForThisVariable = 0.0335248751181
+L : 1, N : 1.34, O : InaBayesNet, M : m, Q : singleEntryForThisVariable = 0.105797542403
+L : 2, N : 1.34, O : InaBayesNet, M : m, Q : singleEntryForThisVariable = 0.0
+"""
+
+

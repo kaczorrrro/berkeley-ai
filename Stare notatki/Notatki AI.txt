@@ -1,0 +1,554 @@
+Reflex Agent
+dla danej sytuacji robi reakcjê, bardzo prosta zasada
+
+Planning Agent
+decyduje na podstawie symulacji co sie stanie kiedy zrobiæ coœ
+
+complete planning - jeœli istnieje rozwi¹zanie to na pewno zostanie znalezione
+
+replanning - znajdywaie malych rozwi¹zañ krokt po kroku, np dla pacmana to szukanie optymalenj œcie¿ki do nastêpnego punktu (zamiast szukaæ najlepszej drogi która bêdzie zawiera³a wszystkie punkty)
+
+
+problem wyszkuwania sk³ada siê z:
+mo¿liwych stanów œwiata
+funckji do wykonania (akcji, kosztów)
+stan startowy, "goal test"  - czyli warunek koñcowy (co nie koniecznie musi byc stanem)
+
+rozwi¹zanie to lista poleceñ od statu startowego do koñcowego
+optymalne robi to najni¿szym kosztem
+
+
+Uninformed Search
+
+Tree search(problem, strategia)
+{
+	zainicjuj stan problemu
+	jeœli nie da siê expandowaæ noda to return false
+	jeœli s¹ da to expanduj zgodnie ze strategi¹
+
+	
+	jeœli dany node spe³ania warunek koñcowy to zwróæ true
+	a jeœli nie to przejdŸ do nastêpnego
+}
+
+Depth-First Search
+przeszukuje drzewo sprawdzaj¹c najpierw dzieci, potem dzieci dzieci itd, na koñcu wraca do rodziców
+mo¿e mieæ problem jeœli np lewa strona drzewa jest nieskoñczona i nigdy nie przjedzie do prawej gdzie mog¹ byæ rozwi¹zania
+czasowa z³o¿onoœæ to b^m
+	miejsca to b*m
+b - split factor
+m - maksymalna g³êbokoœæ
+
+Breadth-Fisrt search
+z³o¿onoœæ czasowa b^s
+	miejsca b^s
+b to iloœc podzia³ów na noda (np 2 dla drzewa binarnego)
+
+iterative deepening
+wykonuje breadth first search ale najpier o max g³êbokoœci 1, jeœli nie znajdzie to analogicznie dla 2, 3 itd
+
+Breadth First znajduje rozwi¹zane które ma najmniej kroków ale nie koniecznie jest najlepsze (bo nie uzwglêdnia kosztów akcji)
+
+
+
+Uniform Cost Search
+szuka najmniej kosztowej œcie¿ki  tak jak Dijkstra
+problem jest taki jeœli istnieje œcie¿ka o kosztach zero to bêdzie ona przeszukiwana bez koñca bo jest za darmo
+dodaje dzieci danego noda do kolejki, ale nie sprawdza czy s¹ one stane koñcowym, robi to dopiero gdy przyjdzie czas na to dizecko w kolejce
+dziêki temu wybierana jest optymalna droga a nie najkrórsza
+
+
+
+
+Informed search:
+Heuristics - function that estimates how close you are from goal
+
+
+greedy search - idzie po nodach które w danym momencie wydaj¹ siê najlepsze zgodnie z heurystyk¹
+
+
+A* search - po³¹czenie UCS (uniform cost search) i Greedy
+wybiera akcje w zale¿noœci od wartoœci heurystyki ale te¿ ich kosztu (backwaradowego, czyli tego do dijkstry)
+
+najpierw wybierane s¹ opcje które s¹ tanie i ofetuj¹ dobr¹ wartoœæ heurstyki,
+algorytm zatrzymuje siê nie kiedy cel zostanie dodany do kolejki ale dopiero wtedy kiedy rzeczywiœcie przyjdzie na niego kolej, czyli przed nim algorytm sprawidzi jeszcze inne trasy które s¹ potencjalnie tanie i mog¹ mieæ dobr¹ heurystykê
+https://www.youtube.com/watch?v=uImx6dEPBbA
+29:48
+
+A* nie znajduje optymalnych rozwi¹zañ (tzn nie musi), du¿o zale¿y od dok³adnoœci funkcji heurystyki
+
+heurystyka powinna dawaæ dobre albo zani¿one wyniki, co bêdzie gwarantowa³o optymalnoœæ
+np jeœli dobra trasa dostnie od heurysyki ma³¹ op³acalnoœæ to nie zostanie sprawdzona a mo¿e byæ optymalna
+ni¿sze wartoœci heurysytki sprawdz¹ wiêcej œcie¿ek
+optymistyczna heurystyka - stwierdza ¿e coœ jest lepsze ni¿ jest 
+
+admissable (optimistic) heuristics - (dopuszczalna heurysytka)
+taka f ¿e:
+0 <= f(x) =< O(x)
+gdzie O(x) to rzeczywista odleg³oœæ od celu (id¹æ mo¿liw¹ œcie¿k¹)
+
+
+heurystyka dominuje inn¹ jesli dla ka¿dego punktu daje wiêksz¹ wartoœæ (ale te¿ nadal musi byæ mniejsza od rzeczeystego kosztu)
+dobra heurystyka moze byc np funkcj¹ max z wartoœci kilku ró¿nych heurystyk
+
+heurystyka trywialna przypisuje 0 zawsze
+
+
+Ogólne wyszukiwanie po grafie:
+closed - spradzone wierzcholki
+fringe - kolejka
+
+loop do:
+	if fringe is empty return false
+
+	node = fringe.pop(strategy)	
+
+	if goalTest(problem, state(node)) == true : return node
+	
+	if node is not in closed:
+		add node to closed
+		add all child nodes to fringe
+
+
+Admissable heuristics - koszt obliczony z tej heurystyki nigdy nie przekracza kosztu rzeczywistego
+Consistent heuristics - analogicznie, ale do tego patrz¹c na 2 kolejne punkty i ich wartoœci heurystyk, spadek heurysyki musi byæ mniejszy ni¿ koszt
+(heurystyczny koszt krawêdzi musi byc mniejszy lub rowny ni¿ prawdziwy)
+Jest ona admissable, bo nigdy nie przekracza rzeczywistej wartoœci, ale nie jest ona consistent bo bêd¹c bli¿ej celu nie daje mniejszych wartoœci
+
+warunek który brzmi sensownie:
+h(n1) - h(n2) <= d(n1,n2)
+
+a* ma warciaje: 
+a* tree search - wygl¹da na to ¿e to onzacza a* bez closed set
+a* graph search
+
+
+If the heuristic function h is admissible, meaning that it never overestimates the actual minimal cost of reaching the goal, then A* is itself admissible (or optimal) if we do not use a closed set. If a closed set is used, then h must also be monotonic (or consistent) for A* to be optimal.
+
+consistent: ostateczne wyjaœnienie
+spadek heurystyki przy przejœciu od a do b musi byœ mniejszy lub równy spadkowi kosztu
+
+konsekwenc¹ consistency jest ¿e wartoœæ f bêdzie zawsze ros³a im bli¿ej celu
+
+
+
+jeœli twory siê listê zamkniêtych nodów których ju¿ nie bêdzie siê sprawdzaæ to warto j¹ implementowaæ jako set, poniewa¿ w takim typie szybko mo¿na sprawdziæ czy ten set coœ zawiera
+
+Graph search ró¿nic siê od tree search tym ¿e graph dodaje nody do closed set i rozwija je tylko jeœli nie ma ich w closed secie, tree w ogóle siê tym nie przejmuje
+
+
+Tree search jest optymalny dla
+A* gdy heurystyka jest admissile
+USC (h = 0 jest admissible)
+
+Graph search jest optymalny dla
+A* gdy heurystyka jest consistent
+
+
+Standard Search Problem
+state - dowolna struktura danych
+goal test - funkcja prawdy/fa³szu na statnach
+funkcja successor to cokolwiek
+
+CSP - Constraing Satisfaction Problems
+stan to zmienne Xi które przyjmuj¹ wartoœci z dziedziny D
+goal test to lista warunków które musz¹ te zmienne spe³niaæ
+
+constraing graph - graf gdzie ka¿da zmienna to wierzcho³ek
+krawêdzie to ogarniaczenia
+krawêdŸ mo¿e dotyczyæ max 2 wierzcholków (mo¿e te¿ jednego, np jesli mamy zmienn¹ która ma mieæ wartoœæ to nie ma sensu l¹czyæ j¹ z jakimkolwiek wierzcho³kiem)
+
+jeœli mamy jakeœ ograniczenie które wymaga wiêcej ni¿ 2 zmiennych to nale¿y po³¹czyæ n zmiennych z kwadratem na grafie
+
+constraintsy mog¹ byæ 
+unitary - tylko jedna zmienna ma znacznenie
+np x=2
+binary - 2 zmienne
+x!=y
+higher order - wiêcej ni¿ 2
+
+istniej¹ te¿ preferencje (soft constraints) które nie zaliczaj¹ siê ju¿ do CSP
+
+
+Rozwi¹zania dla CSP
+Backtracking Search 2 opcje:
+1:przypisywanie jednej zmiennej naraz
+2: sprawdzanie goal-testu przy ka¿dym kroku
+
+wyszukiwanie Depth-first search które implementuje 2 powy¿sze zasady to tzw Backtracking Search
+
+pseudokod
+Recursive-backtracking(assignment,csp)
+	if assignment is complete return assignment
+	var = selecs unasigned variable(strategy)
+	
+	for each possible value for var
+		if var = value is ok with constraints
+			result = recursive-backtracking(new assignemtn, csp)
+		if result != retutn result
+return failure
+
+dodatkowe usprawnienia:
+forward checking:
+wyrzuca z dziedziny zmiennych te, których nie bêdzie mo¿na przyisaæ, np jeœli s¹siaduj¹ce pola maj¹ byc ró¿nych kolorow a dane pole bêdzie czerwone to na pewno mo¿na wszystkim s¹siadom zabraæ z dziedziny opcje czerwone
+forward checking mówi ¿e coœ siê zjeba³o kiedy istnieje jakaœ zmienna której nie mo¿na przypisaæ wartoœci
+
+filtering:
+constraing propagation:
+arc consistency:
+dla nowo przypisanej zmiennej sprawdza wszyskie dziedziny i wyrzuca z nich te wartoœci, o których na ten moment wiadomo ¿e nie bêd¹ ze sob¹ kompatybilne
+³uki nie s¹ consistent kiedy w dziedzienie taila znajduj¹ siê takie wartoœci, ¿e nie ma mo¿liwoœci przypisania ich bez niezgodnosci ze zmienn¹ wskazywan¹ przez g³owê
+po ka¿dym przpisaniu zmiennej mo¿na uruchomiæ arc consistency, dziêki temu szybiciej wykryje siê b³êdy
+
+dla powi¹zanych zmiennych ABCD:
+A->B
+usuwanie z dziedziny A niekompatybilnych wartoœci z B
+jeœli coœ zostanie usuniête z dziedziny A to nale¿y sprawdziæ
+B->A, C->A, D->A
+
+
+wybieranie zmiennych do wykonaia:
+najpierw te które maj¹ ma³o opcji
+przypisywaæ zmiennym które maj¹ ma³o opcji takie opcje które s¹ ma³o ograniczaj¹ce (czyli takie, które zmniejsz¹ dziedzinê inncyh jak najmniej)
+sprawdzanie jak bardzo zmiejszana jest dziedzina:
+dla ka¿dej wartoœci dla zmiennej zrobiæ arc consistency(!) i policzyæ ile zosta³o mo¿liwoœci
+
+
+k-consistency
+1 - consistency - sprawdza czy pojedyñcze zmienne s¹ zgodne z warunkami
+2 - consistency - sprawdza zminne parami czy s¹ zgodne/czy da sie utworzyæ z nich coœ dobrego
+3/k - consistecy - sprawdza zmienne trójkami (k-kami) czy s¹ zgodne
+
+
+
+jeœli csp mo¿e zostaæ przedstawiony jako drzewo (czyli nie ma ¿adnych loopow) to mo¿na go rozwi¹zaæ z O(n *d^2) gdzie n to liczb zmiennych a d to dziedzina
+alogrymt:
+wybraæ rodzica, tak ¿eby nie mia³ ¿adnych rodziców a tylko dzieci
+zrobic backward pass czyli usun¹æ inconsistent values pomiêdzy punktami, zacznaj¹c od koñca
+ró¿nica jest taka ¿e nie zosta³y sprawdzone wszystkie krawêdzie w obie strony (jak w arc consistency), a tylko od prawej do lewej
+potem zacz¹æ przypisywaæ zmienne od przodu, przy okazji uaktualniaj¹c dziedziny.
+Bêdzie to dobre przypisane
+bo:
+wszystkie arcs s¹ consistent co zapewni³ backward pass
+a jeœli arcs s¹ root to leaf consistent to nie bêdzie potrzeby backtracowania
+
+jeœli mamy graf który po pozbyciu siê jakiejœ zmiennej (albo kilku) sta³by siê drzewem to mo¿na to zrobiæ
+polega to na wybraniu zmiennej/nnych, i rozwa¿eniu wszystkich mo¿liwych przypadków dla tej zmiennej, które bêd¹ stanowi³y nowe problemy które mo¿na rozwi¹zaæ jako drzewo (ale nale¿y z dziedzin pozosta³ych zmiennych wyrzuciæ te wartoœci które nie s¹ kompatybilne z wartoœciami przypisanymi wyrzuconej zmiennej)
+
+
+
+Iterative improvement
+Lokalne wyszukiwanie dzia³a zazwyczaj na pe³nych stanach, czyli takich gdzie wszystkim zmiennym zosta³y ju¿ przypisane warotœci
+dzia³anie:
+tak d³ugo jak problem nie jest rozwi¹zany weŸ losow¹ zmienn¹ która jest obecnie z³a i przypisz jej tak¹ wartoœæ, ¿eby by³a najmniej konfliktowa
+
+
+
+Hill Climbing - znajduje najlepsze rozwiazanie lokalne w zale¿noœci od punkut poczatkowego (mo¿e byæ najlepszym rozwiazaniem a mo¿e byæ kiepskie ale lokalnie najlepsze)
+
+
+
+Adverserial Search
+value of a state - best achivable outcome for that state
+for terminal state it is known
+
+minimax value
+zaczynaj¹c od koñca przypisuje siê wartoœci dla stanów, jeœli stany s¹ pod kontrol¹ przeciwnika to wybiera z nich min a jeœli pod nasza kontrol¹ to wybiera siê z nich max
+
+
+Algorytmy adverserial search dla deterministycznych, 0-based games
+
+Algorytm Minimax
+Jeden z graczy wybiera maksymalny value dla mo¿liwych statów, drugi wybiera mininalny value
+implementacja:
+
+max-value(state)
+initalize v = -INT_MAX
+dla ka¿dego successora:
+	v = max(v, min-value(successor))
+return v
+
+funkcja min value wygl¹da analogicznie
+min-value(state)
+initialize v =  +INT_MAX
+dla ka¿dego successora:
+	v = min(v, max-value(successor))
+return v
+
+typowo dla gry:
+jeœtli state jest koñcowy to zwraca siê state utility
+jeœli nastêpny agent to max to zwraca max-value
+jeœli nastêpny agent to min to zwraca min-value
+
+
+depth limited search
+analogicznie, wymaga napisania funkcji która zgaduje jaki bylby utility dla danego stanu
+nie gwarantuje to ju¿ optymalnej gry
+mo¿na dorzuciæ iterative deepening:
+
+sprawdzasz g³êbokoœæ 2 (zgaduj¹c tam wartoœci)
+jeœli czas pozwala to sprawdza g³êbokoœæ 3 (i tam zgaduje warotœci)
+itd
+
+zgadywanie wartoœci: evaluation function
+zazwyczaj jest to wa¿ona suma czynników które mog¹ mieæ wp³yw na wygran¹, np w szachach iloœc figur
+jeœli funkcja ta napisana bêdize Ÿle to mo¿e siê okazaæ ¿e program robi ruchy zupe³nie bez sensu (które maj¹ sens np po 8 ruchach, ale s¹ takie ktore by³yby lepsze)
+
+game tree
+
+
+minimax pruning:
+jeœli maximizer ma opcjê np na 3, sprawdza kolejnego noda, którego wartoœæ bêdzie okreœlona prze minimizer, i ten node ma dzieci, o których wiadomo ¿e wartoœæ jednego z nich to np 2, to nie ma sensu sprawdzaæ reszty, bo minimizer na pewno wybierze coœ mniejsze lub równe 2, czyli maximizer i tak nie weŸnie tej wartoœci skoro mo¿e wybraæ 3.
+nie ma wiêce sensu sprawdzaæ dalej
+
+nazywa siê to alpha-bet pruning
+
+analogicznie w drug¹ stronê, jeœli minimizer ma opcjê 4, sprawdza œcie¿kê gdzie jedno z dzieci ma wartoœæ np 5, a wartoœæ wybierana jest przez maximizer, to nie ma co rozwa¿aæ tej œcie¿ki
+
+def-max-value(state, a,b)
+(a - MAX's best option on path to root -INT_MAX,
+ b - MIN's best option on path to root +INT_MAX)
+initialize v = -INT_MAX
+for each successor:
+	v = max(v,value(successor,a,b))
+	if v>b return v
+	a = max(a,v)
+reutrn v
+
+def-min-value(state, a,b)
+(a - MAX's best option on path to root -INT_MAX,
+ b - MIN's best option on path to root +INT_MAX)
+initialize v = +INT_MAX
+for each successor:
+	v = min(v,value(successor,a,b))
+	if v<a return v
+	b = min(b,v)
+reutrn v
+
+
+// CO BY SIE Sta³o jakby warunek by³ v<=a ?!
+
+w najlepszym scenariuszu w tymm samymm czasie zejœæ 2 razy g³êbiej
+dobrze jest tak wybieraæ dzieci do sprawdzenia ¿eby zawsze najlepsza opcja dla minimizera i maximizera by³a pierwsza
+
+
+
+
+
+Expectimax
+podobne do minimaxa ale zamiast minimizerów stwierdzamy ¿e jest dzieje siê random, czyli zamiast wybieraæ minimaln¹ wartoœc zwracamy œredni¹ z wartoœci
+expectimax nie pozwala na nie przegl¹danie kilka razy tych samych stanów
+
+expectimax pruning:
+na pewno nie w ten sam sposób co dla minimaxa
+generalnie siê nie da
+
+
+
+
+dla gier mulit agent które nie s¹ 0-based mamy nody wyboru dla ka¿dego gracza (po kolei), a na samym dole zamiast pojedyñczej wartoœci utility jest n wartoœci, po jednej dla ka¿dego z graczy
+ka¿dy gracz chce maksymalizowaæ swój outcome
+
+jeœli gracze maj¹ wspó³pracowaæ to ich utilities powinny byæ podobne, nie implementuje siê tego podczas poszukiwania a przypisywania utilitisów
+
+
+racjonalne agenty:
+jeœli agent jest racjonalny to poni¿sze s¹ dla niego prawdziwe
+(A>B)AND(B>C) => (A>C)
+gdzie > oznacza znak preferowania
+
+Orderability (~ obojêtnoœæ)
+(A>B) v (B>A) v (A~B) 
+
+Transitivity
+(A>B)AND(B>C) => (A>C)
+
+Continuity
+A>B>C => istnieje takie p, ¿e [p,A; (1-p),C] ~ B
+istnieje takie p, ¿e loteria pomiêdzy A z prawdopodo p, a C z prawdopodo 1-p bêdzie równie po¿¹dana co B
+
+Substitability
+A~B => [p,A; 1-p,C] ~ [p,B; 1-p,C]
+jeœli chcê A tak jak B, to chcê loterii miêdzy A i C tak samo jak loterii miêdzy B i C
+
+Monotonicity
+A>B => (	p >= q 	<=> [p,A; 1-p,B] >~ [q,A; 1-q,B] 	)
+
+
+jeœli mamy zachowanie które spe³nia te kryteria to mo¿na o nim powiedzieæ ¿e maksymalizuje ono utyle
+
+jeœli mamy preferencje które s¹ zgodnie z tymi za³o¿eniami to istnieje taka funkcja U, ¿e:
+U(A) > U(B) <=> A>B (preferencja)
+U(loteria) to œrednia wa¿ona U(opcje)
+
+
+
+
+Makov Decision Problem
+maze like problems
+goal: maximixe rewards
+
+rozwi¹zywanie problemów w niedeterministycznym œwiecie
+
+MDP:
+Stany s,
+Akcje a,
+Trainision function(s,a,s')	- funkcja która mówi jakie jest prawdopodo ¿e po wykonaniu a z pozycji s trafi siê na s'
+Reward function(s,a,s') albo (s)
+Start state
+mo¿e Terminal state
+Utility - sum of discounted prizes
+
+mo¿na te problemy rozwi¹zywaæ za pomoc¹ expectimax
+
+plan - dobra sekwencja akcji do wykonania - dla deterministycznego œwiata
+policy - dobre akcje dla danych stanów - dla stochastycznego swiata
+
+sensownie ¿eby maksymalizowaæ sumê rewadrów
+i chcieæ je szybko 
+¿eby agent zbiera³ je szybko wartoœci nagród powinny maleæ eksponencjalnie
+np diament teraz daje 1
+za turê daje 0,5
+za 2 tury 0,25
+
+stationary preferences:
+[a1,a2,a3...] > [b1,b2,b3....]
+implikuje
+[r, a1, a2, a3...] > [r,b1,b2,b3...]
+gdzie > to preferowanie
+
+jest tylko jeden sposób dla stationary preferences ¿eby zdefiniowaæ utilitise
+U([r0,r1,r2...]) = r0 + m*r1 + m^2*r2 +...
+gdzie m E (0,1>
+
+
+rozwi¹zanie dla gier które siê nie koñcz¹:
+finite horizon - depth-limited search
+policy mo¿e zale¿eæ wtedy od czasu który pozosta³ albo stanu w którym agent siê znajduje wiêc preferencje mog¹ przestaæ byæ stationary
+
+
+inna opcja to discountowanie, czyli u¿ywanie m (y - gamma) < 1
+dziêki temu suma utyli nawet z nieskoñczonoœci nagród mo¿e byæ ograniczona
+zale¿nie od wartoœci y policy skupi siê bardziej albo na teraŸniejszoœci albo na przysz³oœci
+
+([r0,r1,r2....[) = suma(od 0 do infinity) y^t rt < Rmax* (1 / (1-y) ) //bo to ci¹g geometryczny
+
+opcja trzecia to zagwarantowanie ¿e gra kiedyœ siê skoñczy (nie do koñca czajê o co chodzi)
+
+
+V*(s) - value of a state -> expected utility when starting in s and acting optimally
+Q*(s,a) - expected utility starting from state s and commiting to action a (whatever this action would actually do) and acting optimally afterwards
+
+pi*(s) - optimal action from state s
+
+Vk - to samo co V*, tyle ¿e zak³ada siê ze gra koñczy siê za k kroków (dla V* K = infinity)
+
+
+Bellamn Equation
+V*(s) = max Q*(s,a) //(maks z wartoœci Q* dla ka¿dej akcji a ze stanu s)
+Q*(s,a) = sumaWa¿ona T(s,a,s')[R(s,a,s') + y*V*(s')]
+T(...) - prawdopodo przejœcia
+R(...) - nagroda za przejœcie z s do s'a
+y = discount factor
+
+
+expectimax robi wiêcej ni¿ trzeba
+problem: stany siê powtaraj¹
+subtree jest takie samo w kilku ró¿nych miejscach
+drzewo nigdy siê nie koñczy
+
+im dalej w drzewie tym mniejsze nagrody wiêc nie trzeba siê nimi a¿ tak przejmowaæ
+
+
+optymalizacja
+zaczynamy od najni¿szej warstwy
+dla ka¿dego ró¿nego staru obliczamy wartoœæ, (jeœli stany siê powtarzaj¹ to po prostu przypisuje siê im wartoœci)
+przechodzimy do warstwy wy¿ej
+poniewa¿ hisoria nie ma wp³ywu, liczymy wartoœci znów dla ka¿dego ró¿nego stanu 
+skoro wartoœæ zale¿y tylko od danego stanu i sumy przysz³ych nagród, to niezalezni od ga³êzi drzewa mo¿na dla ka¿demu takiemu statmu stanowi przypisaæ tak¹ sam¹ wartoœæ
+
+nazywa siê to Value iteration:
+Start with V0(s) = 0; bo nie pozosta³ ju¿ ¿aden krok
+Vk+1(s) = max, dla ka¿dego a (sumawa¿ona T(s,a,s')[R(s,a,s')+y*Vk(s')
+
+Vk+1 jest wy¿ej w drzewie ni¿ Vk
+O(S^2A)
+S - iloœæ stanów mo¿liwych
+A - iloœæ akcji
+algorytm nie jest eksponencjalny wzglêdem g³êbokoœci drzewa
+
+
+
+fixed policy expectimax
+uproszcza siê drzewo expectimaxu poniewa¿ dla ka¿dego stanu policy  przypisuje dan¹ akcjê wiêc branching zachodzi jedynie chance-nodach i tylko tam trzeba liczyæ
+V^(pi)(s) = wartoœæ dla stanu s jeœli bêdziemy postêpowaæ zgodnie z policy pi
+
+V^(pi) (s) = œrednia wa¿ona z outcomów akcji: waga: T(s,pi(s),s'), wartoœæ: R(s,pi(s),s') + y V(s')
+
+policy Evaluation:
+dzia³a analogicznie jak value iteration:
+zainicjalizowaæ Vk(s) = 0 (dla stanów na samym dole)
+wchodziæ na górê drzewa wyliczajaæ dla ka¿dego poziomu wartoœci oparte na poprzednim poziomie korzystaj¹c z Bellamn Equation
+
+
+Policy extraction
+same optymalne wartoœci nie wystarczaj¹ aby stwierdziæ jakie akcje nale¿y podejmowaæ w danym stanie. Dla ka¿dego stanu, dla ka¿dej jego mo¿liwe akcji nale¿y policzyæ œredni¹ z jej outcomów i jesli jest ona równa wartoœci opytamalenj która jest ju¿ znana to ta akcja jest opytmalna
+
+jeœli mam wartoœci nie tylko opytamalne, ale dla ka¿dego stanu i dla ka¿dego jego akcji mam wartoœci (Q values), stworzenie policy jest ³atwe, bo wystarczy wybraæ t¹ akcjê dla której wartoœæ Q jest najwiêksza
+
+argmax - dla par (akcja wartoœæ) wybiera najwiêkszoœæ i zwraca odpowiedni¹ dla niej akcjê
+
+
+Policy iteration:
+Zacznij z jak¹œ dowoln¹ policy
+Step 1 : Policy evaluation -> oblicz wartoœci dla tej danej policy dla ka¿dego stanu
+Policy improvment - ekstrakcja policy -> dla nowych wartoœci wygeneruj akcje które bêd¹ optymalne (1-step expectimax)
+Powtarzaj
+
+to mo¿e byæ szybsze jeœli zazwyczaj 
+
+
+Reinforcement learning:
+dzia³a analogicznie jak MDP, ale nagroda prawdopodobieñstwo T() i nagorda R() nie s¹ znane
+
+
+
+Passive reinforcement learning:
+na inpucie policy, ale brak T() i R()
+celem jest poznaæ T i R, czyli w pewnym sensie value dla stanów
+learner nie mo¿e wybieraæ akcji, wykonuje tylko politykê.
+To nie to samo co offilne planning bo learner wykonuje te akcje w rzeczywistoœci a nie o nich "myœli"
+sposoby:
+Direct Evaluation:
+s³abe
+
+Sample based Policy Evaluation
+
+OBRAZEK
+
+nie da siê tego wykorystaæ bo mamy tylko jednego sampla 
+
+Temporal Difference Learning
+idea:
+odœwie¿aæ wartoœæ V(s) za ka¿dym przejœciem (s,a,s',r)
+nadal jest to evaluacja policy ale wygl¹da trochê inaczej
+
+dla ka¿dego takiego przejœcie liczymy wartoœæ sampla:
+sample = R(s,pi(s),s') + y V^pi (s')
+V^pi(s) = (1-a)V^pi(s) + a*sample
+
+czyli dla ka¿dego przejœcia sumujemy nagrodê za to przejœcie i sumê przysz³ych nagród, a nastêpnie aktualizujemy wartoœæ V^pi(s), tak aby by³a w wiêkszoœci star¹ wartoœci¹ ale zawiera³a te¿ czêœæ z nowej wartoœci (tutaj a, np a = 0,05) 
+
+mo¿na to zapisaæ inaczej
+V^pi(s) = V^pi(s) + a(sample - V^pi(s))
+
+Q-learning
+Q od (K+1) (s,a) = suma s', o wagach T(s,a,s') * [ R(s,a,s') + y max(po a) Q od K (s',a') ]
+
+mamy siatkê stanów, zaczynaj¹c¹ siê od samych zer
+przechodzimy przez pozycje i jesli któraœ para s,a czyli akcja z danego pola, przeniesie nas na inne daj¹c nagrodê, to dla tego danego Q(s,a) aktualizujemy wartoœæ analogicznie do wzoru z V (czyli aktualizujê tylko w pewnym stopniu a (np a = 0,5) )
+
+sample = R(s,a,s') + y* max po a: Q(s'a')
+Q(s,a) = (1-a)Q(s,a) + a(sample)
+
+

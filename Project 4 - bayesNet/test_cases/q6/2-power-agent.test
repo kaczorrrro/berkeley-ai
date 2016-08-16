@@ -1,0 +1,16 @@
+class: "EvalAgentTest"
+randomSeed: "0"
+
+agentName: "ReflexPowerChoosingAgent"
+layoutName: "testClassicPower"
+maxTime: "10000"
+numGames: "20"
+power: "blast"
+
+nonTimeoutMinimum: "15"
+
+scoreThresholds: "500 1000"
+
+winsMinimum: "16"
+
+ghosts: "[DirectionalPowerGhost(1),DirectionalPowerGhost(2)]"

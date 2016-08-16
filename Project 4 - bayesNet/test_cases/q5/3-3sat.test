@@ -1,0 +1,106 @@
+class: "IndependenceQuestionTest"
+question: "c"
+max_points: "1"
+alg: "inferenceByVariableElimination"
+seed: "cs188"
+constructRandomly: "True"
+
+variables: """
+X1
+X2
+X3
+X4
+X5
+X6
+Y1
+Y2
+Y3
+Y4
+Y5
+Y6
+Y7
+Y8
+Y9
+Y10
+Y11
+Y12
+Y13
+Y14
+Z
+"""
+
+edges: """
+X1 Y1
+X2 Y1
+X2 Y2
+X2 Y3
+X3 Y1
+X3 Y2
+X4 Y2
+X4 Y3
+X4 Y4
+X5 Y3
+X5 Y4
+X6 Y4
+Y1 Y5
+Y2 Y5
+Y2 Y6
+Y3 Y6
+Y3 Y7
+Y4 Y7
+Y5 Y8
+Y6 Y8
+Y7 Z
+Y8 Z
+Z Y9
+Z Y10
+Y10 Y11
+Y10 Y12
+Y10 Y9
+Y10 Y13
+Y11 Y12
+Y9 Y12
+Y12 Y14
+Y13 Y14
+"""
+
+variableDomainsDict: """
+X1 : 0 1
+X2 : 0 1
+X3 : 0 1
+X4 : 0 1
+X5 : 0 1
+X6 : 0 1
+Y1 : 0 1
+Y2 : 0 1
+Y3 : 0 1
+Y4 : 0 1
+Y5 : 0 1
+Y6 : 0 1
+Y7 : 0 1
+Y8 : 0 1
+Y9 : 0 1
+Y10 : 0 1
+Y11 : 0 1
+Y12 : 0 1
+Y13 : 0 1
+Y14 : 0 1
+Z : 0 1
+"""
+
+queryVariables: "Y9 Y11"
+
+evidenceDict: """
+Z : 1
+Y10 : 0
+"""
+
+variableEliminationOrder: ""
+
+reducedVarElimTime: "0.003466"
+fullVarElimTime: "0.060391"
+reducedEnumerationTime: "0.004647"
+fullEnumerationTime: "248.655288"
+
+# endOfNonFactors
+
